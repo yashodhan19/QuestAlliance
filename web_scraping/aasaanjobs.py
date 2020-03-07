@@ -29,9 +29,22 @@ for j in job_urls:
 
     # Experience
     job_exp = job_page.find('img', attrs={'src': re.compile("https.*icon\-briefcase.*")})
+    job_details['experience'] = job_exp.parent.parent.parent.find_all('div')[-1].find('p').text
 
+    location = job_page.find('img', attrs={'src': re.compile("https.*icon\-pin.*")})
+    job_details['location'] = location.parent.parent.parent.find_all('div')[1].find('p').text
 
-    print(job_exp)
+    # ---------------------
+
+    # Additional Details
+
+    sections = job_page.find('div', attrs={'id': 'job-details'})
+
+    for s in sections:
+        col = s.find_all('div')[0]
+        print(col.find('div', attrs={'class': 'row'}))
+
+    print(sections)
     import pdb
     pdb.set_trace()
 
