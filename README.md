@@ -13,8 +13,22 @@
 
 ## AasanJobs Website
 
-Sample url for [Customer Care Jobs](https://www.aasaanjobs.com/s/customer-care-jobs/)
+Sample url for complete list of [Customer Care Jobs](https://www.aasaanjobs.com/s/customer-care-jobs/)
+
+Here's a single [job details page](https://www.aasaanjobs.com/job/customer-service-associate-479b29-in-ziphertech-621255-b21fb4-933edb-cc9be5/ae660dc2-9905-4cad-82dc-1dc6b9743e1c/)
 
 **Data Points**
 
+- Salary        (amount range) / per month
+- Experience    ("freshers can apply")
+- Location      (location, city, area)
+
+Additional details
+- Job Type      (Full time / part time etc.)
+- Working Days  (days)
+
+Requirements
+- Education
+- Age
+- Experience
 - 
