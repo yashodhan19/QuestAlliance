@@ -36,16 +36,61 @@ for j in job_urls:
 
     # ---------------------
 
-    # Additional Details
+    '''
+    Below is the hierarchy / structure (this structure is below the "Apply CV" button)
 
+    - #job-details
+        - .row
+            - .col-xs-12
+                - .col-xs-12
+                    - .row
+                        - 
+
+    '''
     sections = job_page.find('div', attrs={'id': 'job-details'})
 
     for s in sections:
-        col = s.find_all('div')[0]
-        print(col.find('div', attrs={'class': 'row'}))
+        divs = s.find_all('div')
+        print(divs.find('div', attrs={'class': 'row'}))
+        
+        import pdb
+        pdb.set_trace()
 
-    print(sections)
-    import pdb
-    pdb.set_trace()
+        # divs[0] = salary, experience, location etc.
 
+        
+        # Additional Details
+        '''
+        divs[1]
+            -> div.col-xs-12
+                -> div.col-xs-12/col.md-12...
+                    -> div.row
+                        -> 2nd div (value)
+                            -> p.text()
+        '''
+
+
+        
+        # Job Requirements
+        '''
+        divs[2]
+            -> div.col-xs-12
+                -> div.col-xs-12/col.md-12...
+                    -> div.row
+                        -> 2nd div (under the title div)
+                            -> loop through every div.row
+                                -> 2nd div (value)
+                                    -> directly find `<p>`.text()
+        '''
+
+
+        # Job Description
+        '''
+        divs[3]
+            -> div.col-xs-12
+                -> div.col-xs-12/col.md-12...
+                    -> div.row
+                        -> 2nd div (under the title div)
+                            -> directly find `<p>`.text()
+        '''
 
