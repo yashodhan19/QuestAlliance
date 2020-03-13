@@ -40,10 +40,9 @@ def get_number_of_jobs(jobs):
 def get_job_details(job_url):
     soup = scraper.get_soup(website_baseurl + job_url)
 
-    sections = soup.find('div', attrs={'id': 'job-details'})
-
+    secs = soup.find('div', attrs={'id': 'job-details'})
+    sections = [s for s in secs if s != '\n']
     job_details = dict()
-
 
     # Salary
     job_details['salary_min'] = soup.find_all('span', attrs={'itemprop': 'minValue'})[0].text
@@ -57,12 +56,43 @@ def get_job_details(job_url):
     location = soup.find('img', attrs={'src': re.compile("https.*icon\-pin.*")})
     job_details['location'] = location.parent.parent.parent.find_all('div')[1].find('p').text
 
+    # Additional Details
+    p_tags_ad = sections[1].div.div.div.find_all('p')
+    p_values_ad = [p.text for p in p_tags_ad]
+
+    if len(p_values_ad) % 2 != 0:
+        ad = convert_list_to_dict(p_values_ad[:-1])
+    else:
+        ad = convert_list_to_dict(p_values_ad)
+    
+    job_details.update(ad)
+
+
+    # Job Requirements
+    p_tags_jr = sections[2].div.div.div.find_all('p')
+    p_values_jr = [p.text for p in p_tags_jr]
+
+    if len(p_values_jr) % 2 != 0:
+        jr = convert_list_to_dict(p_values_jr[:-1])
+    else:
+        jr = convert_list_to_dict(p_values_jr)
+
+    job_details.update(jr)
+
+
+    # Job Description
+    p_tags_jd = sections[3].div.div.div.find_all('p')
+    p_values_jd = [p.text for p in p_tags_jd]
+
+    job_details['job_description'] = ''.join(p_values_jd)
+
     print(job_details)
 
-    sections = soup.find('div', attrs={'id': 'job-details'})
-    print(sections)
 
 
+def convert_list_to_dict(lst): 
+    res_dct = {lst[i]: lst[i + 1] for i in range(0, len(lst), 2)}
+    return res_dct
 
 
 def process_job_url(jobs, job_category, number_of_pages):
@@ -88,7 +118,7 @@ def process_job_url(jobs, job_category, number_of_pages):
 
 def run_process():
     job_categories = get_job_categories(
-        xml_path='/Users/yashodhanjoglekar/QuestAlliance/web_scraping/job_categories.xml')
+        xml_path='job_categories.xml')
 
     for job_category in job_categories:
         jobs = scraper.get_soup(website_baseurl + job_category["url"])
