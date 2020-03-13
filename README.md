@@ -1,5 +1,17 @@
 # Quest Alliance
 
+
+create Virtual Env
+
+    cd QuestAlliance
+    
+    python3 -m venv venv
+    source venv/bin/activate
+    pip install -r requirements.txt 
+    
+    
+## Job Areas :
+
 * [Customer Care](https://www.aasaanjobs.com/s/customer-care-jobs/)
 * [BPO](https://www.aasaanjobs.com/s/customer-care-jobs/)
 * [Sales / Business Development](https://www.aasaanjobs.com/s/sales-business-development-jobs/)

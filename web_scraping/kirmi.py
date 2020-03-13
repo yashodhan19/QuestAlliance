@@ -1,3 +1,5 @@
+# Scraper helper functions and caching
+
 import logging
 import requests
 import time
@@ -7,7 +9,7 @@ import uuid
 
 from bs4 import BeautifulSoup
 
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 
 
